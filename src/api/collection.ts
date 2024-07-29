@@ -1,7 +1,6 @@
 import axios from 'axios';
-
-const COLLECTION_API = 'http://localhost:8001/cards ';
+import { CARD_ENDPOINT } from '../constants/share';
 
 export async function fetchCollectionApi() {
-  return axios.get(COLLECTION_API);
+  return axios.get(CARD_ENDPOINT);
 }

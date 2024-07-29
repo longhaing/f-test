@@ -1,10 +1,7 @@
-export const dateStringFormatter = (
-  date: string,
-  formatter: string = 'DD/MM/YYYY'
-) => {
+export const dateStringFormatter = (date: string) => {
   if (!date) {
     return null;
   }
-  const d = new Date(date).toLocaleDateString();
-  return d;
+
+  return new Date(date).toLocaleDateString();
 };

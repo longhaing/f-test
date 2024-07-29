@@ -30,7 +30,7 @@ const Modal: FC<PropsWithChildren<ModalProps>> = ({
   ...props
 }) => {
   return (
-    <Dialog  {...props} onClose={onCancel}>
+    <Dialog {...props} onClose={onCancel}>
       <>
         <DialogContent>{children}</DialogContent>
         {footer ? footer() : <Footer onOK={onOK} onCancel={onCancel} />}
@@ -39,14 +39,13 @@ const Modal: FC<PropsWithChildren<ModalProps>> = ({
   );
 };
 
-const Footer: FC<FooterProps> = () => {
+const Footer: FC<FooterProps> = ({ onCancel, onOK }) => {
   return (
     <DialogActions>
-      <Button>Ok</Button>
-      <Button>Cancel</Button>
+      <Button onClick={onOK}>Ok</Button>
+      <Button onClick={onCancel}>Cancel</Button>
     </DialogActions>
   );
 };
 
 export default Modal;
-
