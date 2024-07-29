@@ -14,6 +14,7 @@ import { FC, PropsWithChildren } from 'react';
 
 type ModalProps = {
   footer?: () => ReactNode;
+  hideFooter?: boolean;
 } & FooterProps &
   DialogProps;
 
@@ -25,28 +26,29 @@ type FooterProps = {
 const Modal: FC<PropsWithChildren<ModalProps>> = ({
   children,
   footer,
+  hideFooter,
   onOK,
   onCancel,
   ...props
 }) => {
   return (
-    <Dialog  {...props} onClose={onCancel}>
+    <Dialog {...props} onClose={onCancel}>
       <>
         <DialogContent>{children}</DialogContent>
-        {footer ? footer() : <Footer onOK={onOK} onCancel={onCancel} />}
+        {!hideFooter &&
+          (footer ? footer() : <Footer onOK={onOK} onCancel={onCancel} />)}
       </>
     </Dialog>
   );
 };
 
-const Footer: FC<FooterProps> = () => {
+const Footer: FC<FooterProps> = ({ onOK, onCancel }) => {
   return (
     <DialogActions>
-      <Button>Ok</Button>
-      <Button>Cancel</Button>
+      <Button onClick={onOK}>Ok</Button>
+      <Button onClick={onCancel}>Cancel</Button>
     </DialogActions>
   );
 };
 
 export default Modal;
-

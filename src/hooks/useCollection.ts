@@ -8,15 +8,21 @@ const useCollection = () => {
 
   const getCollection = useCallback(async () => {
     setLoading(true);
-    const response = await fetchCollectionApi();
-    setCollectionData(response.data);
+    try {
+      const response = await fetchCollectionApi();
+      setCollectionData(response.data);
+
+      setLoading(false);
+    } catch (err) {
+      throw err;
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   const updateCollection = useCallback((newCollection: CollectionItem) => {
     setCollectionData([...collectionData, newCollection]);
   }, []);
-
-  
 
   useEffect(() => {
     getCollection();
